@@ -1,0 +1,5 @@
+.factory*
+.project
+**/.classpath
+**/.settings
+**/.project
