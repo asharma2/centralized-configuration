@@ -1,0 +1,8 @@
+server:
+  port: 9212
+app:
+  config:
+    endpoint: http://127.0.0.1:9211/api/prop/{env}
+logging:
+  level:
+    org.springframework.web.client.RestTemplate: DEBUG
