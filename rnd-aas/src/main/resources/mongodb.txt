@@ -1,0 +1,77 @@
+template.insert(new Venue("10gen Office", -73.99171, 40.738868));
+template.insert(new Venue("Flatiron Building", -73.988135, 40.741404));
+template.insert(new Venue("Players Club", -73.997812, 40.739128));
+template.insert(new Venue("City Bakery ", -73.992491, 40.738673));
+template.insert(new Venue("Splash Bar", -73.992491, 40.738673));
+template.insert(new Venue("Momofuku Milk Bar", -73.985839, 40.731698));
+template.insert(new Venue("Shake Shack", -73.98820, 40.74164));
+template.insert(new Venue("Penn Station", -73.99408, 40.75057));
+template.insert(new Venue("Empire State Building", -73.98602, 40.74894));
+// template.insert(new Venue("Washington Square Park", -73.99756, 40.73083));
+template.insert(new Venue("Ulaanbaatar, Mongolia", 106.9154, 47.9245));
+template.insert(new Venue("Maplewood, NJ", -74.2713, 40.73137)); {
+	"first": {
+		"lat": -73.99756,
+		"lon": 40.73083
+	},
+	"second": {
+		"lat": -73.988135,
+		"lon": 40.741404
+	}
+}
+
+db.restaurants.find({
+	"position": {
+		"$geoWithin": {
+			"$box": [[-73.99756, 40.73083], [-73.988135, 40.741404]]
+		}
+	}
+});
+
+db.restaurants.find({
+	"position": {
+		"$geoWithin": {
+			"$center": [[-73.99171, 40.738868], 0.01]
+		}
+	}
+})
+
+db.restaurants.find({
+	"position": {
+		"$geoWithin": {
+			"$centerSphere": [[-73.99171, 40.738868], 0.01]
+		}
+	}
+});
+
+db.restaurants.find({
+	"position": {
+		"$geoWithin": {
+			"$polygon": [[-73.99756, 40.73083], [-73.99756, 40.741404], [-73.988135, 40.741404], [-73.988135, 40.73083]]
+		}
+	}
+});
+
+db.restaurants.find(
+   {
+     position: {
+       $geoIntersects: {
+          $geometry: {
+             type: "Polygon" ,
+             coordinates: [
+               [ [-73.988135, 40.73083], [-73.99756, 40.73083], [-73.99756, 40.741404], [-73.988135, 40.741404],[-73.988135, 40.73083] ]
+             ]
+          }
+       }
+     }
+   }
+)
+
+
+db.restaurants.find({
+	"position": {
+		"$geoIntersects": {
+			"$polygon": [[-73.988135, 40.73083],[-73.99756, 40.73083], [-73.988135, 40.741404], [-73.988135, 40.73083]]
+		}
+	}
+});

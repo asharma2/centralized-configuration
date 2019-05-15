@@ -1,0 +1,2 @@
+https://www.duchess-france.org/accelerometer-time-series-and-prediction-with-android-cassandra-and-spark/
+https://www.baeldung.com/cassandra-data-modeling

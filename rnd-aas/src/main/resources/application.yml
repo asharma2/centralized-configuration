@@ -1,0 +1,72 @@
+spring:
+  influxdb:
+    url: http://127.0.0.1:8086
+    username: user
+    password: null
+    database: test
+    retention-policy: autogen
+    connect-timeout: 5
+    read-timeout: 5
+    write-timeout: 5
+    gzip: true
+  redis:
+    host: localhost
+    port: 6379
+    password: null
+  lettuce:
+    pool:
+      max-active: 7
+      max-idle: 7
+      min-idle: 2
+      max-wait: -1ms
+      shutdown-timeout: 200ms
+  cache:
+    type: redis
+    redis:
+      cache-null-values: false
+      time-to-live: 600000
+      use-key-prefix: true
+  data:
+    mongodb:
+      host: 127.0.0.1
+      port: 27017
+      database: rnd
+    cassandra:
+      port: 9042
+      keyspace-name: restaurants
+      contact-points:
+      - 127.0.0.1
+    elasticsearch:
+      cluster-name: aks-es
+      cluster-nodes: localhost:9300
+      repositories:
+        enabled: true
+  jpa:
+    show-sql: true
+  main:
+    allow-bean-definition-overriding: true
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: iot-gomiles
+      auto-offset-reset: earliest
+server:
+  port: 8300
+logging:
+  level:
+    org:
+      springframework:
+        data:
+          mongodb:
+            core: DEBUG
+elasticsearch:
+  index:
+    name: restaurant_idx
+    type: restaurant
+gomiles:
+  enrichment:
+    topic-name: t-gm-enrichment
+kafka:
+  bootstrap:
+    servers:
+    - localhost:9092

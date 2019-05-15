@@ -1,0 +1,36 @@
+[{
+     "type": "record",
+     "namespace": "org.gomiles.rnd.dto",
+     "name": "ContactDto",
+     "version": "1",
+     "fields": [
+       { "name": "contact", "type": "string", "doc": "Contact Number" },
+       { "name": "type", "type": "string", "doc": "Home or Work" }
+      ]
+},
+{
+     "type": "record",
+     "namespace": "org.gomiles.rnd.dto",
+     "name": "PositionDto",
+     "version": "1",
+     "fields": [
+       { "name": "lat", "type": "double", "doc": "Latitude" },
+       { "name": "lon", "type": "double", "doc": "Longitude" }
+      ]
+},
+{
+     "type": "record",
+     "namespace": "org.gomiles.rnd.dto",
+     "name": "RestaurantDto",
+     "version": "1",
+     "fields": [
+       { "name": "name", "type": "string", "doc": "Name" },
+       { "name": "city", "type": "string", "doc": "City" },
+       { "name": "state", "type": "string", "doc": "State" },
+       { "name": "country", "type": "string", "doc": "Country" },
+       { "name": "postalCode", "type": "int", "doc": "Postal Code" },
+       {"name": "contacts","type": {"type": "array", "items": "org.gomiles.rnd.dto.ContactDto"}},
+       { "name": "position", "type": "org.gomiles.rnd.dto.PositionDto"}
+       ]
+}
+]

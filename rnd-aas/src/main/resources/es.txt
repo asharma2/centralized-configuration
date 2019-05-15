@@ -1,0 +1,79 @@
+  <!-- Runtime, for Embedded Elasticsearch,
+            comment this if connect to external elastic search server-->
+<dependency>
+            <groupId>net.java.dev.jna</groupId>
+            <artifactId>jna</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        
+        
+SearchQuery searchQuery = new NativeSearchQueryBuilder()
+  .withQuery(matchQuery("title", articleTitle).minimumShouldMatch("75%"))
+  .build();
+  
+IndexQuery userQuery = new IndexQuery();
+    userQuery.setIndexName(indexName);
+    userQuery.setType(userTypeName);
+    userQuery.setObject(user);
+
+    LOG.info("User indexed: {}", esTemplate.index(userQuery));
+    esTemplate.refresh(indexName);
+    
+public interface BookRepository extends Repository<Book, String> {
+
+        List<Book> findByNameAndPrice(String name, Integer price);
+
+        List<Book> findByNameOrPrice(String name, Integer price);
+        
+        Page<Book> findByName(String name,Pageable page);
+
+        Page<Book> findByNameNot(String name,Pageable page);
+
+        Page<Book> findByPriceBetween(int price,Pageable page);
+
+        Page<Book> findByNameLike(String name,Pageable page);
+
+        @Query("{\"bool\" : {\"must\" : {\"term\" : {\"message\" : \"?0\"}}}}")
+        Page<Book> findByMessage(String message, Pageable pageable);
+}
+
+IndexQuery indexQuery = new IndexQueryBuilder().withId(sampleEntity.getId()).withObject(sampleEntity).build();
+elasticsearchTemplate.index(indexQuery);
+
+
+@Configuration
+public class Config {
+
+  @Bean
+  ReactiveElasticsearchClient client() {
+
+    ClientConfiguration clientConfiguration = ClientConfiguration.builder()
+      .connectedTo("localhost:9200", "localhost:9291")
+      .build();
+
+    return ReactiveRestClients.create(clientConfiguration);
+  }
+}
+
+// ...
+
+Mono<IndexResponse> response = client.index(request ->
+
+  request.index("spring-data")
+    .type("elasticsearch")
+    .id(randomID())
+    .source(singletonMap("feature", "reactive-client"))
+    .setRefreshPolicy(IMMEDIATE)
+);
+
+template.save(new Person("Bruce Banner", 42))
+    .doOnNext(System.out::println)
+    .flatMap(person -> template.findById(person.id, Person.class))
+    .doOnNext(System.out::println)
+    .flatMap(person -> template.delete(person))
+    .doOnNext(System.out::println)
+    .flatMap(id -> template.count(Person.class))
+    .doOnNext(System.out::println)
+    .subscribe();
+    
+https://docs.spring.io/spring-data/elasticsearch/docs/3.1.6.RELEASE/reference/html/

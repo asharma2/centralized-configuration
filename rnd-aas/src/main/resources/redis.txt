@@ -1,0 +1,4 @@
+https://www.infoworld.com/article/3128306/build-geospatial-apps-with-redis.html
+https://github.com/spring-projects/spring-data-examples/blob/master/redis/example/src/test/java/example/springdata/redis/commands/GeoOperationsTests.java
+https://dzone.com/articles/intro-to-redis-with-spring-boot
+https://www.concretepage.com/spring-4/spring-data-redis-example
